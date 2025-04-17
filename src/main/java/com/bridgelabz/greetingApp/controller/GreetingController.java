@@ -43,6 +43,7 @@ public class GreetingController {
         return service.addGreeting(user);
     }
 
+    // GET: Return a simple Hello message
     @GetMapping("/hello")
     public Greeting getSimpleGreeting() {
         return service.getSimpleGreeting();
@@ -55,6 +56,22 @@ public class GreetingController {
 
         User user = new User(firstName, lastName);
         return service.addGreeting(user);
+    }
+
+    @GetMapping("/{id}")
+    public Greeting getGreetingsById(@PathVariable long id) {
+        return service.getGreetingById(id);
+    }
+
+    @PutMapping("/{id}")
+    public Greeting updateGreeting(@PathVariable long id, @RequestParam String message) {
+        return service.updateGreeting(id, message);
+    }
+
+    @DeleteMapping("/{id}")
+    public String deleteGreeting(@PathVariable long id) {
+        service.deleteGreeting(id);
+        return "Greeting with ID " + id + " has been deleted.";
     }
 
 }
